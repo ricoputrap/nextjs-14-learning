@@ -1,5 +1,7 @@
+import { fetchInvoicesPages } from "@/app/lib/data";
 import { lusitana } from "@/app/ui/fonts";
 import { CreateInvoice } from "@/app/ui/invoices/buttons";
+import Pagination from "@/app/ui/invoices/pagination";
 import InvoicesTable from "@/app/ui/invoices/table";
 import Search from "@/app/ui/search";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
@@ -15,6 +17,8 @@ interface PageProps {
 export default async function Page({ searchParams }: PageProps) {
   const query = searchParams?.query ?? '';
   const currentPage = searchParams?.page ?? 1;
+
+  const totalPages = await fetchInvoicesPages(query);
 
   return (
     <div className='w-full'>
@@ -34,7 +38,7 @@ export default async function Page({ searchParams }: PageProps) {
       </Suspense>
 
       <div className="mt-5 flex w-full justify-center">
-        {/* <Pagination totalPages={totalPages} /> */}
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   )
