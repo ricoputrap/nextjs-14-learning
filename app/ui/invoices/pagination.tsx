@@ -6,6 +6,13 @@ import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
+enum EnumPagePosition {
+  FIRST = 'first',
+  LAST = 'last',
+  SINGLE = 'single',
+  MIDDLE = 'middle',
+}
+
 export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -29,12 +36,16 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 
         <div className="flex -space-x-px">
           {allPages.map((page, index) => {
-            let position: 'first' | 'last' | 'single' | 'middle' | undefined;
+            let position: EnumPagePosition | undefined;
 
-            if (index === 0) position = 'first';
-            if (index === allPages.length - 1) position = 'last';
-            if (allPages.length === 1) position = 'single';
-            if (page === '...') position = 'middle';
+            if (index === 0)
+              position = EnumPagePosition.FIRST;
+            if (index === allPages.length - 1)
+              position = EnumPagePosition.LAST;
+            if (allPages.length === 1)
+              position = EnumPagePosition.SINGLE;
+            if (page === '...')
+              position = EnumPagePosition.MIDDLE;
 
             return (
               <PaginationNumber
