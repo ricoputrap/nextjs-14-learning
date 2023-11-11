@@ -86,3 +86,15 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export enum EnumPagePosition {
+  FIRST = 'first',
+  LAST = 'last',
+  SINGLE = 'single',
+  MIDDLE = 'middle',
+}
+
+export enum EnumSearchParams {
+  SEARCH = 'query',
+  PAGE = 'page',
+}
