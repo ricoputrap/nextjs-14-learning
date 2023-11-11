@@ -15,7 +15,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
     if (term) {
       params.set(EnumSearchParams.SEARCH, term);
-      params.set(EnumSearchParams.PAGE, 1);
+      params.set(EnumSearchParams.PAGE, '1');
     }
     else params.delete(EnumSearchParams.SEARCH);
 
